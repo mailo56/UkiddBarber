@@ -51,6 +51,28 @@ RUTAS_PUBLICAS = {
 
 
 # =========================================================
+# FORMATO PARA LAS PLANTILLAS
+# =========================================================
+
+@app.template_filter("clp")
+def formato_clp(valor):
+    """8000 -> $8.000 (pesos chilenos)."""
+    try:
+        return "$" + f"{int(valor):,}".replace(",", ".")
+    except (TypeError, ValueError):
+        return valor
+
+
+@app.template_filter("fecha_cl")
+def formato_fecha_cl(valor):
+    """2026-10-22 -> 22/10/2026."""
+    try:
+        return datetime.strptime(valor, "%Y-%m-%d").strftime("%d/%m/%Y")
+    except (TypeError, ValueError):
+        return valor
+
+
+# =========================================================
 # ERRORES Y VALIDACIÓN
 # =========================================================
 
@@ -962,7 +984,8 @@ def reservar_publico():
             "mensaje.html",
             titulo="¡Reserva confirmada!",
             texto=(
-                f"Tu hora fue reservada para el {fecha} a las {hora}. "
+                f"Tu hora fue reservada para el "
+                f"{formato_fecha_cl(fecha)} a las {hora}. "
                 "¡Te esperamos!"
             ),
             enlace=url_for("inicio"),

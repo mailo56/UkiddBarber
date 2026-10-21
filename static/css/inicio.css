@@ -1,16 +1,16 @@
-* {
-    box-sizing: border-box;
-}
+/* =========================================================
+   PÁGINA DE INICIO — Ukidd Barber
+   Usa las variables de base.css.
+   ========================================================= */
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;   /* el navbar fijo no tapa los títulos */
 }
 
 body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #111111;
-    color: white;
+    background: var(--negro);
+    color: var(--blanco);
 }
 
 
@@ -22,7 +22,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #111111;
+    background: var(--negro);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -45,35 +46,71 @@ nav {
 }
 
 nav a {
-    color: white;
+    color: var(--blanco);
     text-decoration: none;
     font-size: 14px;
+    opacity: 0.85;
+    transition: opacity 0.15s;
+}
+
+nav a:hover {
+    opacity: 1;
+}
+
+nav a.btn-reservar {
+    opacity: 1;
 }
 
 .btn-reservar {
-    background: white;
-    color: #111111 !important;
+    background: var(--blanco);
+    color: var(--negro) !important;
     padding: 12px 22px;
     border-radius: 4px;
     font-weight: bold;
+    transition: background-color 0.15s, transform 0.15s;
+}
+
+.btn-reservar:hover {
+    background: var(--gris-200);
+    transform: translateY(-1px);
 }
 
 
 /* HERO */
 
 .hero {
-    min-height: 620px;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: min(620px, 85vh);
     display: flex;
     align-items: center;
     padding: 80px 10%;
 
     background:
-        linear-gradient(
-            90deg,
-            #111111 0%,
-            #111111 45%,
-            rgba(17,17,17,0.55) 100%
-        );
+        radial-gradient(
+            900px 500px at 85% 15%,
+            rgba(255, 255, 255, 0.07),
+            transparent 60%
+        ),
+        var(--negro);
+}
+
+/* Franjas diagonales, guiño al poste de barbería */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0 0 0 55%;
+    z-index: -1;
+
+    background: repeating-linear-gradient(
+        -45deg,
+        rgba(255, 255, 255, 0.07) 0 18px,
+        transparent 18px 36px
+    );
+
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 45%);
+    mask-image: linear-gradient(90deg, transparent, #000 45%);
 }
 
 .hero-contenido {
@@ -84,12 +121,17 @@ nav a {
     font-size: 13px;
     letter-spacing: 4px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin: 0 0 20px;
+}
+
+.hero .etiqueta {
+    color: #cfcfcf;
 }
 
 .hero h1 {
-    font-size: 70px;
+    font-size: clamp(42px, 8vw, 70px);
     line-height: 0.95;
+    letter-spacing: -1px;
     margin: 0 0 30px;
 }
 
@@ -98,33 +140,49 @@ nav a {
     line-height: 1.6;
     max-width: 500px;
     color: #cccccc;
-    margin-bottom: 35px;
+    margin: 0 0 35px;
 }
 
 .btn-principal {
     display: inline-block;
-    background: white;
-    color: #111111;
+    background: var(--blanco);
+    color: var(--negro);
     padding: 16px 30px;
     text-decoration: none;
     font-weight: bold;
+    letter-spacing: 0.5px;
     border-radius: 4px;
+    transition: background-color 0.15s, transform 0.15s;
+}
+
+.btn-principal:hover {
+    background: var(--gris-200);
+    transform: translateY(-2px);
 }
 
 
 /* SECCIONES */
 
 .seccion {
-    background: white;
-    color: #111111;
-    padding: 90px 8%;
+    background: var(--blanco);
+    color: var(--negro);
+    padding: clamp(56px, 9vw, 90px) 6%;
     text-align: center;
 }
 
+.seccion .etiqueta {
+    color: var(--gris-600);
+}
+
 .seccion h2 {
-    font-size: 42px;
+    font-size: clamp(30px, 5vw, 42px);
+    letter-spacing: -0.5px;
     margin-top: 10px;
     margin-bottom: 50px;
+}
+
+.vacio {
+    color: var(--gris-600);
 }
 
 
@@ -138,56 +196,72 @@ nav a {
 }
 
 .tarjeta {
-    width: 280px;
+    width: min(280px, 100%);
     padding: 35px 25px;
-    border: 1px solid #dddddd;
-    border-radius: 8px;
-    background: white;
+    border: 1px solid var(--gris-300);
+    border-radius: var(--radio);
+    background: var(--blanco);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.tarjeta:hover {
+    transform: translateY(-4px);
+    border-color: var(--negro);
+    box-shadow: var(--sombra-hover);
 }
 
 .tarjeta h3 {
     font-size: 22px;
+    margin: 0 0 12px;
+}
+
+.tarjeta p {
+    margin: 0 0 6px;
+    color: var(--gris-600);
 }
 
 .precio {
     font-size: 25px;
     font-weight: bold;
+    color: var(--negro) !important;
 }
 
 
 /* BARBEROS */
 
 .barberos {
-    background: #eeeeee;
+    background: var(--gris-200);
 }
 
 .avatar {
     width: 80px;
     height: 80px;
-    margin: auto;
+    margin: 0 auto 20px;
     display: flex;
     align-items: center;
     justify-content: center;
 
     border-radius: 50%;
-    background: #111111;
-    color: white;
+    background: var(--negro);
+    color: var(--blanco);
 
     font-size: 30px;
     font-weight: bold;
+    text-transform: uppercase;
 }
 
 
 /* CTA */
 
 .cta {
-    padding: 100px 20px;
+    padding: clamp(64px, 10vw, 100px) 20px;
     text-align: center;
-    background: #111111;
+    background: var(--negro);
 }
 
 .cta h2 {
-    font-size: 48px;
+    font-size: clamp(32px, 6vw, 48px);
+    letter-spacing: -0.5px;
     margin: 20px 0 35px;
 }
 
@@ -200,6 +274,58 @@ footer {
     background: #080808;
 }
 
+footer strong {
+    letter-spacing: 2px;
+}
+
 footer p {
-    color: #999999;
+    color: #9a9a9a;
+    margin: 8px 0 0;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 640px) {
+
+    html {
+        scroll-padding-top: 68px;
+    }
+
+    .navbar {
+        height: 68px;
+        padding: 0 5%;
+    }
+
+    .logo {
+        font-size: 19px;
+        letter-spacing: 1.5px;
+    }
+
+    /* En pantallas chicas queda solo el botón de reservar */
+    nav a:not(.btn-reservar) {
+        display: none;
+    }
+
+    .btn-reservar {
+        padding: 10px 18px;
+    }
+
+    .hero {
+        padding: 64px 6%;
+    }
+
+    .descripcion {
+        font-size: 16px;
+    }
+
+    .btn-principal {
+        display: block;
+        text-align: center;
+    }
+
+    .hero .btn-principal {
+        max-width: 320px;
+    }
+
 }

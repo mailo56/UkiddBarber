@@ -18,8 +18,6 @@ Ukidd Barber permite gestionar clientes, servicios, barberos, horarios disponibl
 - Visualizar agenda de reservas.
 - Consulta de horarios disponibles.
 - Acceso de administración protegido con contraseña.
-- Validación de datos.
-- Control de reservas duplicadas.
 
 ## Tecnologías
 
@@ -51,36 +49,48 @@ Crear y activar el entorno virtual:
 ```powershell
 python -m venv .venv
 .venv\Scripts\activate
+```
 
 Instalar las dependencias:
-pip install -r requirements.txt
 
-Definir la contraseña del panel de administración:
+```powershell
+pip install -r requirements.txt
+```
+
+Definir la contraseña del panel de administración (obligatoria para poder ingresar):
+
+```powershell
+# Windows (PowerShell)
 $env:UKIDD_ADMIN_PASSWORD = "elige-una-contraseña-segura"
 
+# Linux / macOS
+export UKIDD_ADMIN_PASSWORD="elige-una-contraseña-segura"
+```
+
 Ejecutar la aplicación:
+
+```powershell
 python app.py
+```
 
-La aplicación estará disponible en:
-http://127.0.0.1:5000/
+La base de datos (`database.db`) se crea automáticamente la primera vez.
 
-Uso
-Sitio público
-Los clientes pueden acceder al sitio público para consultar los servicios y realizar una reserva:
-http://127.0.0.1:5000/
+## Uso
 
-Administración
-El panel administrativo está protegido mediante contraseña:
-http://127.0.0.1:5000/admin/login
+- **Sitio público**: http://127.0.0.1:5000/ — los clientes reservan su hora desde `/reservar`.
+- **Administración**: http://127.0.0.1:5000/admin/login — tras ingresar la contraseña se accede a la agenda, reservas, disponibilidad, clientes, servicios y barberos.
 
-Desde el panel se pueden gestionar:
-- Agenda
-- Reservas
-- Disponibilidad
-- Clientes
-- Servicios
-- Barberos
-Estructura del proyecto
+### Variables de entorno
+
+| Variable | Obligatoria | Descripción |
+|----------|-------------|-------------|
+| `UKIDD_ADMIN_PASSWORD` | Sí | Contraseña del panel de administración. Sin ella no es posible ingresar. |
+| `UKIDD_SECRET_KEY` | No | Clave para firmar las sesiones. Si no se define, se genera una al iniciar (las sesiones se cierran al reiniciar). |
+| `FLASK_DEBUG` | No | Con valor `1` activa el modo debug. No usar en producción. |
+
+## Estructura del proyecto
+
+```
 UkiddBarber/
 │
 ├── app.py
@@ -90,10 +100,14 @@ UkiddBarber/
 ├── .gitignore
 │
 ├── static/
-│   └── css/
-│       ├── estilos.css
-│       ├── inicio.css
-│       └── reservar.css
+│   ├── favicon.svg
+│   ├── css/
+│   │   ├── base.css        (colores y reglas comunes)
+│   │   ├── estilos.css     (panel de administración)
+│   │   ├── inicio.css      (página de inicio)
+│   │   └── reservar.css    (reserva pública)
+│   └── js/
+│       └── admin.js        (confirmación al eliminar/cancelar)
 │
 └── templates/
     ├── inicio.html
@@ -106,24 +120,13 @@ UkiddBarber/
     ├── barberos.html
     ├── disponibilidad.html
     ├── reservas.html
-    ├── agenda.html
     ├── editar_cliente.html
     ├── editar_servicio.html
     ├── editar_barbero.html
-    └── editar_reserva.html
+    ├── editar_reserva.html
+    └── agenda.html
+```
 
-Proyecto
+## Proyecto
+
 Ukidd Barber fue desarrollado como proyecto académico para aplicar conceptos de desarrollo de software, gestión de requisitos, historias de usuario, planificación mediante sprints y control de versiones.
-
-### 3. Guarda
-
-Presiona:
-
-**Ctrl + S**
-
-Y asegúrate de que **ya no aparezca ninguna de estas líneas**:
-
-```text
-<<<<<<< HEAD
-=======
->>>>>>> 2d958fd

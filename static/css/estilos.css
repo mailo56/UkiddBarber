@@ -1,109 +1,20 @@
-* {
-    box-sizing: border-box;
-}
+/* =========================================================
+   PANEL DE ADMINISTRACIÓN — Ukidd Barber
+   Usa las variables de base.css.
+   ========================================================= */
 
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #222;
+    background-color: var(--gris-100);
+    color: var(--negro);
 }
 
 .contenedor {
-    width: 90%;
-    max-width: 1000px;
-    margin: 40px auto;
+    width: 92%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-bottom: 60px;
 }
 
-h1 {
-    margin-bottom: 5px;
-}
-
-h2 {
-    margin-top: 0;
-    margin-bottom: 30px;
-}
-
-.formulario,
-.lista {
-    background-color: white;
-    padding: 25px;
-    margin-bottom: 25px;
-    border-radius: 8px;
-}
-
-.formulario form {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    margin-top: 10px;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-button {
-    margin-top: 15px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #222;
-    color: white;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-}
-
-th {
-    background-color: #eee;
-}
-
-.acciones {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.boton-editar {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #555;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.boton-editar:hover {
-    background-color: #333;
-}
-
-.boton-eliminar {
-    margin-top: 0;
-}
-
-select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: white;
-}
 
 /* ---------- Menú de administración ---------- */
 
@@ -111,44 +22,411 @@ select {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px 18px;
-    margin-bottom: 30px;
-    padding: 12px 20px;
-    background-color: #222;
-    border-radius: 8px;
+    gap: 10px 24px;
+    margin: 24px 0 36px;
+    padding: 14px 22px;
+    background-color: var(--negro);
+    border-radius: var(--radio);
+    color: var(--blanco);
 }
 
-.menu-admin a {
-    color: white;
+.menu-logo {
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 17px;
+}
+
+.menu-logo span {
+    font-weight: normal;
+}
+
+.menu-enlaces {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.menu-enlaces a {
+    padding: 7px 12px;
+    border-radius: 6px;
+    color: #cfcfcf;
     text-decoration: none;
     font-size: 14px;
+    transition: background-color 0.15s, color 0.15s;
 }
 
-.menu-admin a:hover {
-    text-decoration: underline;
+.menu-enlaces a:hover {
+    background-color: rgba(255, 255, 255, 0.10);
+    color: var(--blanco);
+}
+
+.menu-enlaces a.activo {
+    background-color: var(--blanco);
+    color: var(--negro);
+    font-weight: bold;
 }
 
 .menu-admin form {
-    margin-left: auto;
+    margin: 0;
 }
 
 .menu-admin button {
-    margin-top: 0;
-    padding: 6px 12px;
-    background-color: #555;
+    padding: 7px 14px;
+    background-color: transparent;
+    border: 1px solid #555;
+    color: var(--blanco);
     font-size: 13px;
 }
+
+.menu-admin button:hover {
+    background-color: rgba(255, 255, 255, 0.10);
+    border-color: var(--blanco);
+}
+
+
+/* ---------- Títulos de página ----------
+   El <h1> "Ukidd Barber" actúa como etiqueta y el <h2> como título. */
+
+.contenedor > h1 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gris-600);
+}
+
+.contenedor > h2 {
+    margin: 0 0 28px;
+    font-size: clamp(26px, 4vw, 36px);
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+}
+
+
+/* ---------- Tarjetas ---------- */
+
+.formulario,
+.lista {
+    margin-bottom: 28px;
+    padding: 28px;
+    background-color: var(--blanco);
+    border: 1px solid #ececec;
+    border-radius: 10px;
+    box-shadow: var(--sombra);
+}
+
+.formulario h2,
+.formulario h3,
+.lista h3 {
+    margin: 0 0 20px;
+    font-size: 18px;
+}
+
+.lista {
+    overflow-x: auto;
+}
+
+.lista > p {
+    margin: 0;
+    padding: 20px 0 4px;
+    color: var(--gris-600);
+}
+
+
+/* ---------- Formularios ---------- */
+
+.formulario form {
+    display: flex;
+    flex-direction: column;
+    max-width: 520px;
+}
+
+label {
+    margin: 16px 0 6px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+label:first-child {
+    margin-top: 0;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--gris-300);
+    border-radius: 6px;
+    background-color: var(--blanco);
+    font: inherit;
+    font-size: 15px;
+    color: var(--negro);
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+input:hover,
+select:hover {
+    border-color: var(--gris-400);
+}
+
+input:focus,
+select:focus {
+    border-color: var(--negro);
+    box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.12);
+}
+
+.formulario form button[type="submit"] {
+    align-self: flex-start;
+    margin-top: 24px;
+}
+
+
+/* ---------- Botones ---------- */
+
+button {
+    padding: 11px 20px;
+    border: 1px solid var(--negro);
+    border-radius: 6px;
+    background-color: var(--negro);
+    color: var(--blanco);
+    font: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+/* Botón secundario (enlace con aspecto de botón) */
+.boton-editar {
+    display: inline-block;
+    padding: 9px 16px;
+    border: 1px solid var(--gris-300);
+    border-radius: 6px;
+    background-color: var(--blanco);
+    color: var(--negro);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: border-color 0.15s, background-color 0.15s;
+}
+
+.boton-editar:hover {
+    border-color: var(--negro);
+    background-color: var(--gris-100);
+}
+
+/* Botón destructivo (eliminar / cancelar) */
+.boton-eliminar {
+    padding: 9px 16px;
+    border-color: #e6b8b4;
+    background-color: var(--blanco);
+    color: var(--error);
+}
+
+.boton-eliminar:hover {
+    border-color: var(--error);
+    background-color: var(--error-fondo);
+}
+
+
+/* ---------- Tablas ---------- */
+
+table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--negro);
+    background: transparent;
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gris-600);
+    white-space: nowrap;
+}
+
+td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--gris-200);
+    vertical-align: middle;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: #fafaf9;
+}
+
+/* No se usa display:flex en la celda: rompería la alineación de la fila */
+td.acciones {
+    white-space: nowrap;
+}
+
+td.acciones > * {
+    display: inline-block;
+    margin: 0 8px 0 0;
+    vertical-align: middle;
+}
+
+td.acciones form {
+    margin: 0 8px 0 0;
+}
+
+
+/* ---------- Estados ---------- */
+
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.badge-confirmada,
+.badge-disponible {
+    background-color: var(--exito-fondo);
+    color: var(--exito);
+}
+
+.badge-cancelada {
+    background-color: var(--error-fondo);
+    color: var(--error);
+}
+
+.badge-ocupado {
+    background-color: var(--aviso-fondo);
+    color: var(--aviso);
+}
+
 
 /* ---------- Páginas simples (login, mensajes) ---------- */
 
 .contenedor-angosto {
     max-width: 480px;
+    margin-top: 10vh;
 }
 
 .mensaje-error {
-    margin-top: 0;
-    padding: 10px 12px;
-    background-color: #fdecea;
-    color: #8a1c13;
-    border-radius: 5px;
+    margin: 0 0 20px;
+    padding: 12px 14px;
+    border-radius: 6px;
+    background-color: var(--error-fondo);
+    color: var(--error);
+    font-size: 14px;
+}
+
+.contenedor-angosto a:not(.boton-editar) {
+    color: var(--gris-700);
+}
+
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+
+    .menu-admin {
+        margin: 16px 0 24px;
+        padding: 12px 14px;
+    }
+
+    .menu-enlaces {
+        flex-basis: 100%;
+        order: 3;
+    }
+
+    .menu-admin form {
+        margin-left: auto;
+    }
+
+    /* Menú más compacto: los 7 enlaces caben en dos filas */
+    .menu-enlaces a {
+        padding: 6px 9px;
+        font-size: 13px;
+    }
+
+    .formulario,
+    .lista {
+        padding: 20px 16px;
+    }
+
+    .formulario form button[type="submit"] {
+        align-self: stretch;
+    }
+
+    /* Tablas como tarjetas apiladas: cada fila pasa a ser un bloque y
+       cada celda muestra su etiqueta (atributo data-label) a la izquierda. */
+    table {
+        min-width: 0;
+    }
+
+    thead {
+        position: absolute;
+        left: -9999px;      /* oculto visualmente, accesible para lectores */
+    }
+
+    table,
+    tbody,
+    tr,
+    td {
+        display: block;
+    }
+
+    tr {
+        padding: 14px 0;
+        border-bottom: 1px solid var(--gris-300);
+    }
+
+    tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 6px 0;
+        border: none;
+        text-align: right;
+    }
+
+    td::before {
+        content: attr(data-label);
+        flex-shrink: 0;
+        font-size: 11px;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--gris-600);
+        text-align: left;
+    }
+
+    /* La fila de botones va a la izquierda y sin etiqueta */
+    td.acciones {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        padding-top: 12px;
+    }
+
+    td.acciones::before {
+        display: none;
+    }
+
 }

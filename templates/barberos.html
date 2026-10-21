@@ -6,6 +6,9 @@
 
     <title>Ukidd Barber - Barberos</title>
 
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/estilos.css') }}"
@@ -78,15 +81,15 @@
 
                             <tr>
 
-                                <td>
+                                <td data-label="ID">
                                     {{ barbero["id_barbero"] }}
                                 </td>
 
-                                <td>
+                                <td data-label="Nombre">
                                     {{ barbero["nombre"] }}
                                 </td>
 
-                                <td class="acciones">
+                                <td data-label="Acciones" class="acciones">
 
                                     <a
                                         href="{{ url_for(

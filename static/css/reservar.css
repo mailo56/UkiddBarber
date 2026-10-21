@@ -1,12 +1,11 @@
-* {
-    box-sizing: border-box;
-}
+/* =========================================================
+   RESERVA PÚBLICA — Ukidd Barber
+   Usa las variables de base.css.
+   ========================================================= */
 
 body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f4f2;
-    color: #111111;
+    background: var(--gris-100);
+    color: var(--negro);
 }
 
 
@@ -18,8 +17,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #111111;
-    color: white;
+    background: var(--negro);
+    color: var(--blanco);
 }
 
 .logo {
@@ -33,9 +32,16 @@ body {
 }
 
 .volver {
-    color: white;
+    color: var(--blanco);
     text-decoration: none;
     font-size: 14px;
+    opacity: 0.85;
+    transition: opacity 0.15s;
+}
+
+.volver:hover {
+    opacity: 1;
+    text-decoration: underline;
 }
 
 
@@ -59,26 +65,30 @@ body {
     font-size: 12px;
     letter-spacing: 4px;
     font-weight: bold;
+    margin: 0;
+    color: var(--gris-600);
 }
 
 .encabezado h1 {
-    font-size: 48px;
+    font-size: clamp(34px, 6vw, 48px);
+    letter-spacing: -0.5px;
     margin: 15px 0;
 }
 
 .encabezado p:last-child {
-    color: #666666;
+    color: var(--gris-600);
     font-size: 17px;
+    margin: 0;
 }
 
 
 /* CARD */
 
 .reserva-card {
-    background: white;
+    background: var(--blanco);
     padding: 45px;
     border-radius: 10px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--sombra);
 }
 
 
@@ -86,7 +96,7 @@ body {
 
 .bloque {
     padding: 30px 0;
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid var(--gris-300);
 }
 
 .bloque:first-child {
@@ -126,15 +136,32 @@ input[type="text"],
 input[type="tel"],
 input[type="email"],
 input[type="date"] {
+    width: 100%;
     padding: 14px;
     border: 1px solid #cccccc;
     border-radius: 5px;
+    background: var(--blanco);
+    font: inherit;
     font-size: 15px;
+    color: var(--negro);
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+input[type="text"]:hover,
+input[type="tel"]:hover,
+input[type="email"]:hover,
+input[type="date"]:hover {
+    border-color: var(--gris-400);
 }
 
 input:focus {
     outline: none;
-    border-color: #111111;
+    border-color: var(--negro);
+    box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.12);
+}
+
+input[type="radio"] {
+    accent-color: var(--negro);
 }
 
 
@@ -151,18 +178,33 @@ input:focus {
     align-items: center;
     gap: 15px;
     padding: 18px;
-    border: 1px solid #dddddd;
+    border: 1px solid var(--gris-300);
     border-radius: 7px;
     cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s,
+                box-shadow 0.15s;
 }
 
 .opcion:hover {
-    border-color: #111111;
+    border-color: var(--negro);
+}
+
+/* La opción elegida se nota de un vistazo (box-shadow: sin mover el layout) */
+.opcion:has(input:checked) {
+    border-color: var(--negro);
+    background: var(--gris-100);
+    box-shadow: inset 0 0 0 1px var(--negro);
+}
+
+.opcion:has(input:focus-visible) {
+    outline: 3px solid var(--negro);
+    outline-offset: 2px;
 }
 
 .opcion input {
     width: 18px;
     height: 18px;
+    margin: 0;
 }
 
 .opcion div {
@@ -175,8 +217,12 @@ input:focus {
 }
 
 .opcion span {
-    color: #777777;
+    color: var(--gris-600);
     font-size: 13px;
+}
+
+.opcion b {
+    white-space: nowrap;
 }
 
 
@@ -189,24 +235,38 @@ input:focus {
 }
 
 .barbero-opcion {
+    position: relative;
     width: 180px;
     padding: 20px;
-    border: 1px solid #dddddd;
+    border: 1px solid var(--gris-300);
     border-radius: 7px;
     text-align: center;
     cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s,
+                box-shadow 0.15s;
 }
 
 .barbero-opcion:hover {
-    border-color: #111111;
+    border-color: var(--negro);
 }
 
+/* El radio se oculta visualmente pero sigue accesible con el teclado
+   (display:none lo sacaba del orden de tabulación). */
 .barbero-opcion input {
-    display: none;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .barbero-opcion:has(input:checked) {
-    border: 2px solid #111111;
+    border-color: var(--negro);
+    background: var(--gris-100);
+    box-shadow: inset 0 0 0 1px var(--negro);
+}
+
+.barbero-opcion:has(input:focus-visible) {
+    outline: 3px solid var(--negro);
+    outline-offset: 2px;
 }
 
 .avatar {
@@ -214,12 +274,14 @@ input:focus {
     height: 65px;
     margin: 0 auto 12px;
     border-radius: 50%;
-    background: #111111;
-    color: white;
+    background: var(--negro);
+    color: var(--blanco);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 
@@ -230,7 +292,7 @@ input:focus {
 }
 
 .ayuda {
-    color: #777777;
+    color: var(--gris-600);
     font-size: 14px;
     margin-top: 25px;
 }
@@ -246,27 +308,33 @@ input:focus {
 }
 
 .hora {
+    min-width: 84px;
     padding: 13px 20px;
-    background: white;
-    border: 1px solid #bbbbbb;
+    background: var(--blanco);
+    border: 1px solid var(--gris-400);
     border-radius: 5px;
-    cursor: pointer;
+    color: var(--negro);
+    font: inherit;
     font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s,
+                border-color 0.15s;
 }
 
 .hora:hover {
-    background: #111111;
-    color: white;
+    border-color: var(--negro);
+    background: var(--gris-100);
 }
 
 .hora.seleccionada {
-    background: #111111;
-    color: white;
-    border-color: #111111;
+    background: var(--negro);
+    color: var(--blanco);
+    border-color: var(--negro);
 }
 
 .mensaje {
-    color: #777777;
+    color: var(--gris-600);
+    margin: 0;
 }
 
 
@@ -281,14 +349,23 @@ input:focus {
     padding: 16px 30px;
     border: none;
     border-radius: 5px;
-    background: #111111;
-    color: white;
+    background: var(--negro);
+    color: var(--blanco);
+    font: inherit;
     font-weight: bold;
+    letter-spacing: 0.5px;
     cursor: pointer;
+    transition: background-color 0.15s, transform 0.15s;
+}
+
+.confirmar button:hover:not(:disabled) {
+    background: #333333;
+    transform: translateY(-1px);
 }
 
 .confirmar button:disabled {
     background: #cccccc;
+    color: var(--gris-600);
     cursor: not-allowed;
 }
 
@@ -298,7 +375,17 @@ input:focus {
 @media (max-width: 700px) {
 
     .navbar {
+        height: 68px;
         padding: 0 5%;
+    }
+
+    .logo {
+        font-size: 19px;
+        letter-spacing: 1.5px;
+    }
+
+    .reserva-container {
+        padding: 40px 16px;
     }
 
     .grid {
@@ -310,11 +397,21 @@ input:focus {
     }
 
     .reserva-card {
-        padding: 25px;
+        padding: 25px 20px;
     }
 
-    .encabezado h1 {
-        font-size: 38px;
+    .barbero-opcion {
+        width: calc(50% - 8px);
+        padding: 16px 10px;
+    }
+
+    .hora {
+        flex: 1 0 calc(33% - 10px);
+        padding: 13px 10px;
+    }
+
+    .confirmar button {
+        width: 100%;
     }
 
 }

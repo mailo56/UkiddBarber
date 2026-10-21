@@ -6,6 +6,9 @@
 
     <title>Ukidd Barber - Clientes</title>
 
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/estilos.css') }}"
@@ -106,23 +109,23 @@
 
                             <tr>
 
-                                <td>
+                                <td data-label="ID">
                                     {{ cliente["id_cliente"] }}
                                 </td>
 
-                                <td>
+                                <td data-label="Nombre">
                                     {{ cliente["nombre"] }}
                                 </td>
 
-                                <td>
+                                <td data-label="Teléfono">
                                     {{ cliente["telefono"] }}
                                 </td>
 
-                                <td>
+                                <td data-label="Correo">
                                     {{ cliente["correo"] or "-" }}
                                 </td>
 
-                                <td class="acciones">
+                                <td data-label="Acciones" class="acciones">
 
                                     <!-- EDITAR -->
 

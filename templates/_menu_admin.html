@@ -1,15 +1,51 @@
-<nav class="menu-admin">
+{% set ep = request.endpoint %}
 
-    <a href="{{ url_for('agenda') }}">Agenda</a>
-    <a href="{{ url_for('reservas') }}">Reservas</a>
-    <a href="{{ url_for('disponibilidad') }}">Disponibilidad</a>
-    <a href="{{ url_for('clientes') }}">Clientes</a>
-    <a href="{{ url_for('servicios') }}">Servicios</a>
-    <a href="{{ url_for('barberos') }}">Barberos</a>
-    <a href="{{ url_for('inicio') }}">Sitio público</a>
+<nav class="menu-admin" aria-label="Administración">
+
+    <a href="{{ url_for('agenda') }}" class="menu-logo">
+        UKIDD <span>BARBER</span>
+    </a>
+
+    <div class="menu-enlaces">
+
+        <a
+            href="{{ url_for('agenda') }}"
+            {% if ep == 'agenda' %}class="activo" aria-current="page"{% endif %}
+        >Agenda</a>
+
+        <a
+            href="{{ url_for('reservas') }}"
+            {% if ep in ('reservas', 'editar_reserva') %}class="activo" aria-current="page"{% endif %}
+        >Reservas</a>
+
+        <a
+            href="{{ url_for('disponibilidad') }}"
+            {% if ep == 'disponibilidad' %}class="activo" aria-current="page"{% endif %}
+        >Disponibilidad</a>
+
+        <a
+            href="{{ url_for('clientes') }}"
+            {% if ep in ('clientes', 'editar_cliente') %}class="activo" aria-current="page"{% endif %}
+        >Clientes</a>
+
+        <a
+            href="{{ url_for('servicios') }}"
+            {% if ep in ('servicios', 'editar_servicio') %}class="activo" aria-current="page"{% endif %}
+        >Servicios</a>
+
+        <a
+            href="{{ url_for('barberos') }}"
+            {% if ep in ('barberos', 'editar_barbero') %}class="activo" aria-current="page"{% endif %}
+        >Barberos</a>
+
+        <a href="{{ url_for('inicio') }}">Sitio público</a>
+
+    </div>
 
     <form action="{{ url_for('logout_admin') }}" method="POST">
         <button type="submit">Cerrar sesión</button>
     </form>
 
 </nav>
+
+<script src="{{ url_for('static', filename='js/admin.js') }}" defer></script>

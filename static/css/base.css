@@ -1,0 +1,100 @@
+/* =========================================================
+   BASE COMPARTIDA — Ukidd Barber
+   Colores, tipografía y reglas comunes a todas las páginas.
+   Se carga antes que inicio.css, reservar.css y estilos.css.
+   ========================================================= */
+
+:root {
+    /* Marca: monocromática */
+    --negro: #111111;
+    --negro-suave: #1c1c1c;
+    --blanco: #ffffff;
+
+    /* Grises */
+    --gris-100: #f4f4f2;
+    --gris-200: #eeeeee;
+    --gris-300: #dddddd;
+    --gris-400: #bbbbbb;
+    --gris-600: #666666;   /* texto secundario (contraste AA sobre blanco) */
+    --gris-700: #444444;
+
+    /* Estados */
+    --exito: #1e7a46;
+    --exito-fondo: #e6f4ec;
+    --error: #b3261e;
+    --error-fondo: #fdecea;
+    --aviso: #8a5a00;
+    --aviso-fondo: #fff4d6;
+
+    /* Forma */
+    --radio: 8px;
+    --sombra: 0 8px 30px rgba(0, 0, 0, 0.06);
+    --sombra-hover: 0 14px 30px rgba(0, 0, 0, 0.10);
+
+    --fuente: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--fuente);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+    max-width: 100%;
+}
+
+::selection {
+    background: var(--negro);
+    color: var(--blanco);
+}
+
+
+/* ---------- Accesibilidad: foco visible con teclado ---------- */
+
+:focus-visible {
+    outline: 3px solid var(--negro);
+    outline-offset: 2px;
+}
+
+/* Sobre fondos oscuros el anillo de foco es blanco */
+.navbar :focus-visible,
+.hero :focus-visible,
+.cta :focus-visible,
+footer :focus-visible,
+.menu-admin :focus-visible {
+    outline-color: var(--blanco);
+}
+
+/* El campo ya tiene su propio resaltado al enfocar */
+input:focus-visible,
+select:focus-visible {
+    outline: none;
+}
+
+
+/* ---------- Movimiento reducido ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+        scroll-behavior: auto !important;
+    }
+
+}

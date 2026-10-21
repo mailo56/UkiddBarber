@@ -11,6 +11,9 @@
 
     <title>Ukidd Barber</title>
 
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/inicio.css') }}"
@@ -116,7 +119,7 @@
                     </h3>
 
                     <p class="precio">
-                        ${{ servicio["precio"] }}
+                        {{ servicio["precio"]|clp }}
                     </p>
 
                     <p>
@@ -124,6 +127,12 @@
                     </p>
 
                 </div>
+
+            {% else %}
+
+                <p class="vacio">
+                    Pronto publicaremos nuestros servicios.
+                </p>
 
             {% endfor %}
 
@@ -166,6 +175,12 @@
                     </p>
 
                 </div>
+
+            {% else %}
+
+                <p class="vacio">
+                    Pronto presentaremos a nuestro equipo.
+                </p>
 
             {% endfor %}
 

@@ -6,6 +6,9 @@
 
     <title>Ukidd Barber - Reservas</title>
 
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/estilos.css') }}"
@@ -75,7 +78,7 @@
                     {% for servicio in servicios %}
 
                         <option value="{{ servicio['id_servicio'] }}">
-                            {{ servicio['nombre'] }} - ${{ servicio['precio'] }}
+                            {{ servicio['nombre'] }} - {{ servicio['precio']|clp }}
                         </option>
 
                     {% endfor %}
@@ -172,31 +175,31 @@
 
                             <tr>
 
-                                <td>
+                                <td data-label="Cliente">
                                     {{ reserva["nombre_cliente"] }}
                                 </td>
 
-                                <td>
+                                <td data-label="Servicio">
                                     {{ reserva["nombre_servicio"] }}
                                 </td>
 
-                                <td>
+                                <td data-label="Barbero">
                                     {{ reserva["nombre_barbero"] }}
                                 </td>
 
-                                <td>
-                                    {{ reserva["fecha"] }}
+                                <td data-label="Fecha">
+                                    {{ reserva["fecha"]|fecha_cl }}
                                 </td>
 
-                                <td>
+                                <td data-label="Hora">
                                     {{ reserva["hora"] }}
                                 </td>
 
-                                <td>
-                                    {{ reserva["estado"] }}
+                                <td data-label="Estado">
+                                    <span class="badge badge-{{ reserva["estado"]|lower }}">{{ reserva["estado"] }}</span>
                                 </td>
 
-                                <td class="acciones">
+                                <td data-label="Acciones" class="acciones">
 
                                     {% if reserva["estado"] == "Confirmada" %}
 

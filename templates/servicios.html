@@ -6,6 +6,9 @@
 
     <title>Ukidd Barber - Servicios</title>
 
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/estilos.css') }}"
@@ -109,23 +112,23 @@
 
                             <tr>
 
-                                <td>
+                                <td data-label="ID">
                                     {{ servicio["id_servicio"] }}
                                 </td>
 
-                                <td>
+                                <td data-label="Servicio">
                                     {{ servicio["nombre"] }}
                                 </td>
 
-                                <td>
-                                    ${{ servicio["precio"] }}
+                                <td data-label="Precio">
+                                    {{ servicio["precio"]|clp }}
                                 </td>
 
-                                <td>
+                                <td data-label="Duración">
                                     {{ servicio["duracion"] }} min
                                 </td>
 
-                                <td class="acciones">
+                                <td data-label="Acciones" class="acciones">
 
                                     <!-- EDITAR -->
 
