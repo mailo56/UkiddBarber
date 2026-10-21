@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Ukidd Barber</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/inicio.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            UKIDD <span>BARBER</span>
+        </div>
+
+        <nav>
+
+            <a href="#inicio">
+                Inicio
+            </a>
+
+            <a href="#servicios">
+                Servicios
+            </a>
+
+            <a href="#barberos">
+                Barberos
+            </a>
+
+            <a
+                href="{{ url_for('reservar_publico') }}"
+                class="btn-reservar"
+            >
+                Reservar
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <section
+        id="inicio"
+        class="hero"
+    >
+
+        <div class="hero-contenido">
+
+            <p class="etiqueta">
+                UKIDD BARBER
+            </p>
+
+            <h1>
+                TU ESTILO.<br>
+                TU MOMENTO.
+            </h1>
+
+            <p class="descripcion">
+                Reserva tu hora de manera rápida,
+                sencilla y elige el servicio y
+                barbero que prefieras.
+            </p>
+
+            <a
+                href="{{ url_for('reservar_publico') }}"
+                class="btn-principal"
+            >
+                RESERVAR AHORA
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- SERVICIOS -->
+
+    <section
+        id="servicios"
+        class="seccion"
+    >
+
+        <p class="etiqueta">
+            NUESTROS SERVICIOS
+        </p>
+
+        <h2>
+            Elige tu estilo
+        </h2>
+
+        <div class="tarjetas">
+
+            {% for servicio in servicios %}
+
+                <div class="tarjeta">
+
+                    <h3>
+                        {{ servicio["nombre"] }}
+                    </h3>
+
+                    <p class="precio">
+                        ${{ servicio["precio"] }}
+                    </p>
+
+                    <p>
+                        {{ servicio["duracion"] }} minutos
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <!-- BARBEROS -->
+
+    <section
+        id="barberos"
+        class="seccion barberos"
+    >
+
+        <p class="etiqueta">
+            NUESTRO EQUIPO
+        </p>
+
+        <h2>
+            Elige tu barbero
+        </h2>
+
+        <div class="tarjetas">
+
+            {% for barbero in barberos %}
+
+                <div class="tarjeta barbero">
+
+                    <div class="avatar">
+                        {{ barbero["nombre"][0] }}
+                    </div>
+
+                    <h3>
+                        {{ barbero["nombre"] }}
+                    </h3>
+
+                    <p>
+                        Barbero profesional
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section class="cta">
+
+        <p class="etiqueta">
+            ¿LISTO PARA TU PRÓXIMO CORTE?
+        </p>
+
+        <h2>
+            Reserva tu hora ahora.
+        </h2>
+
+        <a
+            href="{{ url_for('reservar_publico') }}"
+            class="btn-principal"
+        >
+            RESERVAR MI HORA
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <strong>
+            UKIDD BARBER
+        </strong>
+
+        <p>
+            Tu estilo, tu momento.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

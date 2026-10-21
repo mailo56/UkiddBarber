@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ukidd Barber - Servicios</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Ukidd Barber</h1>
+        <h2>Gestión de servicios</h2>
+
+
+        <!-- FORMULARIO PARA AGREGAR SERVICIO -->
+
+        <section class="formulario">
+
+            <h3>Agregar servicio</h3>
+
+            <form
+                action="{{ url_for('agregar_servicio') }}"
+                method="POST"
+            >
+
+                <label for="nombre">
+                    Nombre del servicio
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    required
+                >
+
+
+                <label for="precio">
+                    Precio
+                </label>
+
+                <input
+                    type="number"
+                    id="precio"
+                    name="precio"
+                    min="0"
+                    required
+                >
+
+
+                <label for="duracion">
+                    Duración (minutos)
+                </label>
+
+                <input
+                    type="number"
+                    id="duracion"
+                    name="duracion"
+                    min="1"
+                    required
+                >
+
+
+                <button type="submit">
+                    Agregar servicio
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- LISTA DE SERVICIOS -->
+
+        <section class="lista">
+
+            <h3>Servicios registrados</h3>
+
+            {% if servicios %}
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Servicio</th>
+                            <th>Precio</th>
+                            <th>Duración</th>
+                            <th>Acciones</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for servicio in servicios %}
+
+                            <tr>
+
+                                <td>
+                                    {{ servicio["id_servicio"] }}
+                                </td>
+
+                                <td>
+                                    {{ servicio["nombre"] }}
+                                </td>
+
+                                <td>
+                                    ${{ servicio["precio"] }}
+                                </td>
+
+                                <td>
+                                    {{ servicio["duracion"] }} min
+                                </td>
+
+                                <td class="acciones">
+
+                                    <!-- EDITAR -->
+
+                                    <a
+                                        href="{{ url_for(
+                                            'editar_servicio',
+                                            id_servicio=servicio['id_servicio']
+                                        ) }}"
+                                        class="boton-editar"
+                                    >
+                                        Editar
+                                    </a>
+
+
+                                    <!-- ELIMINAR -->
+
+                                    <form
+                                        action="{{ url_for(
+                                            'eliminar_servicio',
+                                            id_servicio=servicio['id_servicio']
+                                        ) }}"
+                                        method="POST"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="boton-eliminar"
+                                        >
+                                            Eliminar
+                                        </button>
+
+                                    </form>
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            {% else %}
+
+                <p>
+                    No hay servicios registrados.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+    </div>
+
+</body>
+</html>

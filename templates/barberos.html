@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ukidd Barber - Barberos</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Ukidd Barber</h1>
+        <h2>Gestión de barberos</h2>
+
+        <!-- AGREGAR BARBERO -->
+
+        <section class="formulario">
+
+            <h3>Agregar barbero</h3>
+
+            <form
+                action="{{ url_for('agregar_barbero') }}"
+                method="POST"
+            >
+
+                <label for="nombre">
+                    Nombre
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    required
+                >
+
+                <button type="submit">
+                    Agregar barbero
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- LISTA DE BARBEROS -->
+
+        <section class="lista">
+
+            <h3>Barberos registrados</h3>
+
+            {% if barberos %}
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for barbero in barberos %}
+
+                            <tr>
+
+                                <td>
+                                    {{ barbero["id_barbero"] }}
+                                </td>
+
+                                <td>
+                                    {{ barbero["nombre"] }}
+                                </td>
+
+                                <td class="acciones">
+
+                                    <a
+                                        href="{{ url_for(
+                                            'editar_barbero',
+                                            id_barbero=barbero['id_barbero']
+                                        ) }}"
+                                        class="boton-editar"
+                                    >
+                                        Editar
+                                    </a>
+
+                                    <form
+                                        action="{{ url_for(
+                                            'eliminar_barbero',
+                                            id_barbero=barbero['id_barbero']
+                                        ) }}"
+                                        method="POST"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="boton-eliminar"
+                                        >
+                                            Eliminar
+                                        </button>
+
+                                    </form>
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            {% else %}
+
+                <p>
+                    No hay barberos registrados.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+    </div>
+
+</body>
+</html>

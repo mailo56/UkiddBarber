@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ukidd Barber - Agenda</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Ukidd Barber</h1>
+        <h2>Agenda de reservas</h2>
+
+
+        <!-- AGENDA -->
+
+        <section class="lista">
+
+            <h3>Reservas programadas</h3>
+
+            {% if reservas %}
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Cliente</th>
+                            <th>Servicio</th>
+                            <th>Barbero</th>
+                            <th>Estado</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for reserva in reservas %}
+
+                            <tr>
+
+                                <td>
+                                    {{ reserva["fecha"] }}
+                                </td>
+
+                                <td>
+                                    {{ reserva["hora"] }}
+                                </td>
+
+                                <td>
+                                    {{ reserva["nombre_cliente"] }}
+                                </td>
+
+                                <td>
+                                    {{ reserva["nombre_servicio"] }}
+                                </td>
+
+                                <td>
+                                    {{ reserva["nombre_barbero"] }}
+                                </td>
+
+                                <td>
+                                    {{ reserva["estado"] }}
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            {% else %}
+
+                <p>
+                    No hay reservas registradas en la agenda.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+    </div>
+
+</body>
+</html>

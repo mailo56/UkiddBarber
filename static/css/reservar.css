@@ -1,0 +1,320 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f4f2;
+    color: #111111;
+}
+
+
+/* NAVBAR */
+
+.navbar {
+    height: 80px;
+    padding: 0 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #111111;
+    color: white;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    font-weight: normal;
+}
+
+.volver {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+
+/* CONTENEDOR */
+
+.reserva-container {
+    max-width: 950px;
+    margin: auto;
+    padding: 70px 25px;
+}
+
+
+/* ENCABEZADO */
+
+.encabezado {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.etiqueta {
+    font-size: 12px;
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
+.encabezado h1 {
+    font-size: 48px;
+    margin: 15px 0;
+}
+
+.encabezado p:last-child {
+    color: #666666;
+    font-size: 17px;
+}
+
+
+/* CARD */
+
+.reserva-card {
+    background: white;
+    padding: 45px;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+
+/* BLOQUES */
+
+.bloque {
+    padding: 30px 0;
+    border-bottom: 1px solid #dddddd;
+}
+
+.bloque:first-child {
+    padding-top: 0;
+}
+
+.bloque h2 {
+    font-size: 21px;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+
+/* CAMPOS */
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo-completo {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="date"] {
+    padding: 14px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #111111;
+}
+
+
+/* SERVICIOS */
+
+.opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.opcion {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.opcion:hover {
+    border-color: #111111;
+}
+
+.opcion input {
+    width: 18px;
+    height: 18px;
+}
+
+.opcion div {
+    flex: 1;
+}
+
+.opcion strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.opcion span {
+    color: #777777;
+    font-size: 13px;
+}
+
+
+/* BARBEROS */
+
+.barberos {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.barbero-opcion {
+    width: 180px;
+    padding: 20px;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.barbero-opcion:hover {
+    border-color: #111111;
+}
+
+.barbero-opcion input {
+    display: none;
+}
+
+.barbero-opcion:has(input:checked) {
+    border: 2px solid #111111;
+}
+
+.avatar {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    background: #111111;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+
+
+/* FECHA */
+
+.fecha {
+    max-width: 300px;
+}
+
+.ayuda {
+    color: #777777;
+    font-size: 14px;
+    margin-top: 25px;
+}
+
+
+/* HORARIOS */
+
+.horarios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.hora {
+    padding: 13px 20px;
+    background: white;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.hora:hover {
+    background: #111111;
+    color: white;
+}
+
+.hora.seleccionada {
+    background: #111111;
+    color: white;
+    border-color: #111111;
+}
+
+.mensaje {
+    color: #777777;
+}
+
+
+/* CONFIRMAR */
+
+.confirmar {
+    padding-top: 35px;
+    text-align: right;
+}
+
+.confirmar button {
+    padding: 16px 30px;
+    border: none;
+    border-radius: 5px;
+    background: #111111;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.confirmar button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 0 5%;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-completo {
+        grid-column: auto;
+    }
+
+    .reserva-card {
+        padding: 25px;
+    }
+
+    .encabezado h1 {
+        font-size: 38px;
+    }
+
+}

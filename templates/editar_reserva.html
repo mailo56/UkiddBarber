@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ukidd Barber - Modificar reserva</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Ukidd Barber</h1>
+        <h2>Modificar reserva</h2>
+
+        <section class="formulario">
+
+            <form
+                action="{{ url_for(
+                    'editar_reserva',
+                    id_reserva=reserva['id_reserva']
+                ) }}"
+                method="POST"
+            >
+
+                <label for="id_cliente">
+                    Cliente
+                </label>
+
+                <select
+                    id="id_cliente"
+                    name="id_cliente"
+                    required
+                >
+
+                    {% for cliente in clientes %}
+
+                        <option
+                            value="{{ cliente['id_cliente'] }}"
+                            {% if cliente['id_cliente'] == reserva['id_cliente'] %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ cliente['nombre'] }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+
+                <label for="id_servicio">
+                    Servicio
+                </label>
+
+                <select
+                    id="id_servicio"
+                    name="id_servicio"
+                    required
+                >
+
+                    {% for servicio in servicios %}
+
+                        <option
+                            value="{{ servicio['id_servicio'] }}"
+                            {% if servicio['id_servicio'] == reserva['id_servicio'] %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ servicio['nombre'] }}
+                            - ${{ servicio['precio'] }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+
+                <label for="id_barbero">
+                    Barbero
+                </label>
+
+                <select
+                    id="id_barbero"
+                    name="id_barbero"
+                    required
+                >
+
+                    {% for barbero in barberos %}
+
+                        <option
+                            value="{{ barbero['id_barbero'] }}"
+                            {% if barbero['id_barbero'] == reserva['id_barbero'] %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ barbero['nombre'] }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+
+                <label for="fecha">
+                    Fecha
+                </label>
+
+                <input
+                    type="date"
+                    id="fecha"
+                    name="fecha"
+                    value="{{ reserva['fecha'] }}"
+                    required
+                >
+
+
+                <label for="hora">
+                    Hora
+                </label>
+
+                <input
+                    type="time"
+                    id="hora"
+                    name="hora"
+                    value="{{ reserva['hora'] }}"
+                    required
+                >
+
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+            </form>
+
+            <a href="{{ url_for('reservas') }}">
+                Volver a reservas
+            </a>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

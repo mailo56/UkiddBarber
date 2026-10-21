@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ukidd Barber - Disponibilidad</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Ukidd Barber</h1>
+        <h2>Gestión de disponibilidad</h2>
+
+
+        <!-- AGREGAR DISPONIBILIDAD -->
+
+        <section class="formulario">
+
+            <h3>Agregar disponibilidad</h3>
+
+            <form
+                action="{{ url_for('agregar_disponibilidad') }}"
+                method="POST"
+            >
+
+                <label for="id_barbero">
+                    Barbero
+                </label>
+
+                <select
+                    id="id_barbero"
+                    name="id_barbero"
+                    required
+                >
+
+                    <option value="">
+                        Seleccionar barbero
+                    </option>
+
+                    {% for barbero in barberos %}
+
+                        <option value="{{ barbero['id_barbero'] }}">
+                            {{ barbero['nombre'] }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+
+                <label for="fecha">
+                    Fecha
+                </label>
+
+                <input
+                    type="date"
+                    id="fecha"
+                    name="fecha"
+                    required
+                >
+
+
+                <label for="hora">
+                    Hora
+                </label>
+
+                <input
+                    type="time"
+                    id="hora"
+                    name="hora"
+                    required
+                >
+
+
+                <button type="submit">
+                    Agregar disponibilidad
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- LISTA DE DISPONIBILIDAD -->
+
+        <section class="lista">
+
+            <h3>Horarios disponibles</h3>
+
+            {% if disponibilidades %}
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Barbero</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for disponibilidad in disponibilidades %}
+
+                            <tr>
+
+                                <td>
+                                    {{ disponibilidad["nombre_barbero"] }}
+                                </td>
+
+                                <td>
+                                    {{ disponibilidad["fecha"] }}
+                                </td>
+
+                                <td>
+                                    {{ disponibilidad["hora"] }}
+                                </td>
+
+                                <td>
+                                    {% if disponibilidad["disponible"] == 1 %}
+                                        Disponible
+                                    {% else %}
+                                        No disponible
+                                    {% endif %}
+                                </td>
+
+                                <td class="acciones">
+
+                                    <form
+                                        action="{{ url_for(
+                                            'eliminar_disponibilidad',
+                                            id_disponibilidad=disponibilidad[
+                                                'id_disponibilidad'
+                                            ]
+                                        ) }}"
+                                        method="POST"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="boton-eliminar"
+                                        >
+                                            Eliminar
+                                        </button>
+
+                                    </form>
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            {% else %}
+
+                <p>
+                    No hay horarios disponibles registrados.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+    </div>
+
+</body>
+</html>

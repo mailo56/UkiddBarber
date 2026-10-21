@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ukidd Barber - Reservas</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Ukidd Barber</h1>
+        <h2>Gestión de reservas</h2>
+
+
+        <!-- CREAR RESERVA -->
+
+        <section class="formulario">
+
+            <h3>Crear reserva</h3>
+
+            <form
+                action="{{ url_for('agregar_reserva') }}"
+                method="POST"
+            >
+
+                <label for="id_cliente">
+                    Cliente
+                </label>
+
+                <select
+                    id="id_cliente"
+                    name="id_cliente"
+                    required
+                >
+
+                    <option value="">
+                        Seleccionar cliente
+                    </option>
+
+                    {% for cliente in clientes %}
+
+                        <option value="{{ cliente['id_cliente'] }}">
+                            {{ cliente['nombre'] }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+
+                <label for="id_servicio">
+                    Servicio
+                </label>
+
+                <select
+                    id="id_servicio"
+                    name="id_servicio"
+                    required
+                >
+
+                    <option value="">
+                        Seleccionar servicio
+                    </option>
+
+                    {% for servicio in servicios %}
+
+                        <option value="{{ servicio['id_servicio'] }}">
+                            {{ servicio['nombre'] }} - ${{ servicio['precio'] }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+
+                <label for="id_barbero">
+                    Barbero
+                </label>
+
+                <select
+                    id="id_barbero"
+                    name="id_barbero"
+                    required
+                >
+
+                    <option value="">
+                        Seleccionar barbero
+                    </option>
+
+                    {% for barbero in barberos %}
+
+                        <option value="{{ barbero['id_barbero'] }}">
+                            {{ barbero['nombre'] }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+
+                <label for="fecha">
+                    Fecha
+                </label>
+
+                <input
+                    type="date"
+                    id="fecha"
+                    name="fecha"
+                    required
+                >
+
+
+                <label for="hora">
+                    Hora
+                </label>
+
+                <input
+                    type="time"
+                    id="hora"
+                    name="hora"
+                    required
+                >
+
+
+                <button type="submit">
+                    Crear reserva
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- LISTA DE RESERVAS -->
+
+        <section class="lista">
+
+            <h3>Reservas registradas</h3>
+
+            {% if reservas %}
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Servicio</th>
+                            <th>Barbero</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for reserva in reservas %}
+
+                            <tr>
+
+                                <td>
+                                    {{ reserva["nombre_cliente"] }}
+                                </td>
+
+                                <td>
+                                    {{ reserva["nombre_servicio"] }}
+                                </td>
+
+                                <td>
+                                    {{ reserva["nombre_barbero"] }}
+                                </td>
+
+                                <td>
+                                    {{ reserva["fecha"] }}
+                                </td>
+
+                                <td>
+                                    {{ reserva["hora"] }}
+                                </td>
+
+                                <td>
+                                    {{ reserva["estado"] }}
+                                </td>
+
+                                <td class="acciones">
+
+                                    {% if reserva["estado"] == "Confirmada" %}
+
+                                        <!-- EDITAR -->
+
+                                        <a
+                                            href="{{ url_for(
+                                                'editar_reserva',
+                                                id_reserva=reserva['id_reserva']
+                                            ) }}"
+                                            class="boton-editar"
+                                        >
+                                            Editar
+                                        </a>
+
+
+                                        <!-- CANCELAR -->
+
+                                        <form
+                                            action="{{ url_for(
+                                                'cancelar_reserva',
+                                                id_reserva=reserva['id_reserva']
+                                            ) }}"
+                                            method="POST"
+                                        >
+
+                                            <button
+                                                type="submit"
+                                                class="boton-eliminar"
+                                            >
+                                                Cancelar
+                                            </button>
+
+                                        </form>
+
+                                    {% else %}
+
+                                        <span>
+                                            Sin acciones
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            {% else %}
+
+                <p>
+                    No hay reservas registradas.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+    </div>
+
+</body>
+</html>

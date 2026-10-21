@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ukidd Barber - Clientes</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Ukidd Barber</h1>
+        <h2>Gestión de clientes</h2>
+
+
+        <!-- FORMULARIO PARA AGREGAR CLIENTE -->
+
+        <section class="formulario">
+
+            <h3>Agregar cliente</h3>
+
+            <form
+                action="{{ url_for('agregar_cliente') }}"
+                method="POST"
+            >
+
+                <label for="nombre">
+                    Nombre
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    required
+                >
+
+
+                <label for="telefono">
+                    Teléfono
+                </label>
+
+                <input
+                    type="text"
+                    id="telefono"
+                    name="telefono"
+                    required
+                >
+
+
+                <label for="correo">
+                    Correo
+                </label>
+
+                <input
+                    type="email"
+                    id="correo"
+                    name="correo"
+                >
+
+
+                <button type="submit">
+                    Agregar cliente
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- LISTA DE CLIENTES -->
+
+        <section class="lista">
+
+            <h3>Clientes registrados</h3>
+
+            {% if clientes %}
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
+                            <th>Correo</th>
+                            <th>Acciones</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for cliente in clientes %}
+
+                            <tr>
+
+                                <td>
+                                    {{ cliente["id_cliente"] }}
+                                </td>
+
+                                <td>
+                                    {{ cliente["nombre"] }}
+                                </td>
+
+                                <td>
+                                    {{ cliente["telefono"] }}
+                                </td>
+
+                                <td>
+                                    {{ cliente["correo"] or "-" }}
+                                </td>
+
+                                <td class="acciones">
+
+                                    <!-- EDITAR -->
+
+                                    <a
+                                        href="{{ url_for(
+                                            'editar_cliente',
+                                            id_cliente=cliente['id_cliente']
+                                        ) }}"
+                                        class="boton-editar"
+                                    >
+                                        Editar
+                                    </a>
+
+
+                                    <!-- ELIMINAR -->
+
+                                    <form
+                                        action="{{ url_for(
+                                            'eliminar_cliente',
+                                            id_cliente=cliente['id_cliente']
+                                        ) }}"
+                                        method="POST"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="boton-eliminar"
+                                        >
+                                            Eliminar
+                                        </button>
+
+                                    </form>
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            {% else %}
+
+                <p>
+                    No hay clientes registrados.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+    </div>
+
+</body>
+</html>

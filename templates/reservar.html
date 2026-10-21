@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Ukidd Barber - Reservar hora</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/reservar.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            UKIDD <span>BARBER</span>
+        </div>
+
+        <a
+            href="{{ url_for('inicio') }}"
+            class="volver"
+        >
+            ← Volver al inicio
+        </a>
+
+    </header>
+
+
+    <!-- RESERVA -->
+
+    <main class="reserva-container">
+
+        <div class="encabezado">
+
+            <p class="etiqueta">
+                RESERVA ONLINE
+            </p>
+
+            <h1>
+                Reserva tu hora
+            </h1>
+
+            <p>
+                Elige tu servicio, barbero y horario.
+                Tu reserva quedará confirmada al finalizar.
+            </p>
+
+        </div>
+
+
+        <section class="reserva-card">
+
+            <form
+                action="{{ url_for('reservar_publico') }}"
+                method="POST"
+                id="formReserva"
+            >
+
+
+                <!-- DATOS CLIENTE -->
+
+                <div class="bloque">
+
+                    <h2>
+                        01. Tus datos
+                    </h2>
+
+                    <div class="grid">
+
+                        <div class="campo">
+
+                            <label for="nombre">
+                                Nombre
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nombre"
+                                name="nombre"
+                                placeholder="Tu nombre"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="telefono">
+                                Teléfono
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="telefono"
+                                name="telefono"
+                                placeholder="+56 9 1234 5678"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="campo campo-completo">
+
+                            <label for="correo">
+                                Correo electrónico
+                            </label>
+
+                            <input
+                                type="email"
+                                id="correo"
+                                name="correo"
+                                placeholder="tucorreo@email.com"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SERVICIO -->
+
+                <div class="bloque">
+
+                    <h2>
+                        02. Elige tu servicio
+                    </h2>
+
+                    <div class="opciones">
+
+                        {% for servicio in servicios %}
+
+                            <label class="opcion">
+
+                                <input
+                                    type="radio"
+                                    name="id_servicio"
+                                    value="{{ servicio['id_servicio'] }}"
+                                    required
+                                >
+
+                                <div>
+
+                                    <strong>
+                                        {{ servicio["nombre"] }}
+                                    </strong>
+
+                                    <span>
+                                        {{ servicio["duracion"] }} minutos
+                                    </span>
+
+                                </div>
+
+                                <b>
+                                    ${{ servicio["precio"] }}
+                                </b>
+
+                            </label>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- BARBERO -->
+
+                <div class="bloque">
+
+                    <h2>
+                        03. Elige tu barbero
+                    </h2>
+
+                    <div class="barberos">
+
+                        {% for barbero in barberos %}
+
+                            <label class="barbero-opcion">
+
+                                <input
+                                    type="radio"
+                                    name="id_barbero"
+                                    value="{{ barbero['id_barbero'] }}"
+                                    required
+                                >
+
+                                <div class="avatar">
+                                    {{ barbero["nombre"][0] }}
+                                </div>
+
+                                <strong>
+                                    {{ barbero["nombre"] }}
+                                </strong>
+
+                            </label>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- FECHA -->
+
+                <div class="bloque">
+
+                    <h2>
+                        04. Selecciona fecha y hora
+                    </h2>
+
+                    <div class="fecha">
+
+                        <label for="fecha">
+                            Fecha
+                        </label>
+
+                        <input
+                            type="date"
+                            id="fecha"
+                            name="fecha"
+                            required
+                        >
+
+                    </div>
+
+
+                    <p class="ayuda">
+                        Selecciona primero un barbero y una fecha
+                        para mostrar los horarios disponibles.
+                    </p>
+
+
+                    <div
+                        id="horarios"
+                        class="horarios"
+                    >
+
+                        <p class="mensaje">
+                            Selecciona un barbero y una fecha.
+                        </p>
+
+                    </div>
+
+                    <input
+                        type="hidden"
+                        id="hora"
+                        name="hora"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CONFIRMAR -->
+
+                <div class="confirmar">
+
+                    <button
+                        type="submit"
+                        id="btnConfirmar"
+                        disabled
+                    >
+                        CONFIRMAR RESERVA
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        const fecha = document.getElementById("fecha");
+        const hora = document.getElementById("hora");
+        const horarios = document.getElementById("horarios");
+        const btnConfirmar = document.getElementById("btnConfirmar");
+
+        const barberos = document.querySelectorAll(
+            'input[name="id_barbero"]'
+        );
+
+
+        function obtenerBarbero() {
+
+            const seleccionado = document.querySelector(
+                'input[name="id_barbero"]:checked'
+            );
+
+            return seleccionado
+                ? seleccionado.value
+                : null;
+        }
+
+
+        async function cargarHorarios() {
+
+            const idBarbero = obtenerBarbero();
+
+            hora.value = "";
+            btnConfirmar.disabled = true;
+
+            if (!idBarbero || !fecha.value) {
+
+                horarios.innerHTML = `
+                    <p class="mensaje">
+                        Selecciona un barbero y una fecha.
+                    </p>
+                `;
+
+                return;
+            }
+
+
+            horarios.innerHTML = `
+                <p class="mensaje">
+                    Buscando horarios disponibles...
+                </p>
+            `;
+
+
+            try {
+
+                const respuesta = await fetch(
+                    `/api/horarios?id_barbero=${idBarbero}&fecha=${fecha.value}`
+                );
+
+                const datos = await respuesta.json();
+
+
+                if (datos.length === 0) {
+
+                    horarios.innerHTML = `
+                        <p class="mensaje">
+                            No hay horarios disponibles para esta fecha.
+                        </p>
+                    `;
+
+                    return;
+                }
+
+
+                horarios.innerHTML = "";
+
+
+                datos.forEach(function(horario) {
+
+                    const boton = document.createElement("button");
+
+                    boton.type = "button";
+
+                    boton.className = "hora";
+
+                    boton.textContent = horario.hora;
+
+
+                    boton.addEventListener(
+                        "click",
+                        function() {
+
+                            document
+                                .querySelectorAll(".hora")
+                                .forEach(function(elemento) {
+                                    elemento.classList.remove("seleccionada");
+                                });
+
+                            boton.classList.add("seleccionada");
+
+                            hora.value = horario.hora;
+
+                            btnConfirmar.disabled = false;
+
+                        }
+                    );
+
+
+                    horarios.appendChild(boton);
+
+                });
+
+            } catch (error) {
+
+                horarios.innerHTML = `
+                    <p class="mensaje">
+                        No se pudieron cargar los horarios.
+                    </p>
+                `;
+
+            }
+
+        }
+
+
+        barberos.forEach(function(barbero) {
+
+            barbero.addEventListener(
+                "change",
+                cargarHorarios
+            );
+
+        });
+
+
+        fecha.addEventListener(
+            "change",
+            cargarHorarios
+        );
+
+    </script>
+
+</body>
+
+</html>

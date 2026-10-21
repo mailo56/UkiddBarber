@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ukidd Barber - Editar servicio</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Ukidd Barber</h1>
+        <h2>Editar servicio</h2>
+
+        <section class="formulario">
+
+            <form
+                action="{{ url_for(
+                    'editar_servicio',
+                    id_servicio=servicio['id_servicio']
+                ) }}"
+                method="POST"
+            >
+
+                <label for="nombre">
+                    Nombre del servicio
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    value="{{ servicio['nombre'] }}"
+                    required
+                >
+
+
+                <label for="precio">
+                    Precio
+                </label>
+
+                <input
+                    type="number"
+                    id="precio"
+                    name="precio"
+                    value="{{ servicio['precio'] }}"
+                    min="0"
+                    required
+                >
+
+
+                <label for="duracion">
+                    Duración (minutos)
+                </label>
+
+                <input
+                    type="number"
+                    id="duracion"
+                    name="duracion"
+                    value="{{ servicio['duracion'] }}"
+                    min="1"
+                    required
+                >
+
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+            </form>
+
+
+            <a href="{{ url_for('servicios') }}">
+                Volver a servicios
+            </a>
+
+        </section>
+
+    </div>
+
+</body>
+</html>
