@@ -49,3 +49,56 @@ Crear y activar el entorno virtual:
 ```powershell
 python -m venv .venv
 .venv\Scripts\activate
+
+Instalar las dependencias:
+pip install flask
+
+Ejecutar la aplicación:
+python app.py
+
+Luego acceder desde el navegador a:
+http://127.0.0.1:5000/
+
+Estructura del proyecto
+UkiddBarber/
+│
+├── app.py
+├── database.py
+├── README.md
+├── .gitignore
+│
+├── static/
+│   └── css/
+│       ├── estilos.css
+│       ├── inicio.css
+│       └── reservar.css
+│
+└── templates/
+    ├── inicio.html
+    ├── reservar.html
+    ├── clientes.html
+    ├── servicios.html
+    ├── barberos.html
+    ├── disponibilidad.html
+    ├── reservas.html
+    ├── editar_cliente.html
+    ├── editar_servicio.html
+    ├── editar_barbero.html
+    ├── editar_reserva.html
+    └── agenda.html
+
+Proyecto
+Ukidd Barber fue desarrollado como proyecto académico para aplicar conceptos de desarrollo de software, gestión de requisitos, historias de usuario, planificación mediante sprints y control de versiones.
+
+### 3. Guarda el cambio
+
+Arriba a la derecha tienes el botón verde que empieza con **“Commit…”**.
+
+Haz clic ahí.
+
+Te aparecerá una ventana para confirmar el commit. Puedes dejar:
+
+```text
+Update README.md
+
+y seleccionar Commit changes.
