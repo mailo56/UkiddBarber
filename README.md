@@ -48,3 +48,49 @@ Crear y activar el entorno virtual:
 ```powershell
 python -m venv .venv
 .venv\Scripts\activate
+```
+Instalar las dependencias:
+```powershell
+pip install flask
+
+```
+
+Ejecutar la aplicación:
+```powershell
+python app.py
+```
+Luego acceder desde el navegador a:
+http://127.0.0.1:5000/
+
+
+UkiddBarber/
+│
+├── app.py
+├── database.py
+├── README.md
+├── .gitignore
+│
+├── static/
+│   └── css/
+│       ├── estilos.css
+│       ├── inicio.css
+│       └── reservar.css
+│
+└── templates/
+    ├── inicio.html
+    ├── reservar.html
+    ├── clientes.html
+    ├── servicios.html
+    ├── barberos.html
+    ├── disponibilidad.html
+    ├── reservas.html
+    ├── editar_cliente.html
+    ├── editar_servicio.html
+    ├── editar_barbero.html
+    ├── editar_reserva.html
+    └── agenda.html
+
+
+    Proyecto
+Ukidd Barber fue desarrollado como proyecto académico para aplicar conceptos de desarrollo de software, gestión de requisitos, historias de usuario, planificación mediante sprints y control de versiones.
+
