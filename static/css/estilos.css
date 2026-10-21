@@ -104,3 +104,51 @@ select {
     border-radius: 5px;
     background-color: white;
 }
+
+/* ---------- Menú de administración ---------- */
+
+.menu-admin {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 18px;
+    margin-bottom: 30px;
+    padding: 12px 20px;
+    background-color: #222;
+    border-radius: 8px;
+}
+
+.menu-admin a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.menu-admin a:hover {
+    text-decoration: underline;
+}
+
+.menu-admin form {
+    margin-left: auto;
+}
+
+.menu-admin button {
+    margin-top: 0;
+    padding: 6px 12px;
+    background-color: #555;
+    font-size: 13px;
+}
+
+/* ---------- Páginas simples (login, mensajes) ---------- */
+
+.contenedor-angosto {
+    max-width: 480px;
+}
+
+.mensaje-error {
+    margin-top: 0;
+    padding: 10px 12px;
+    background-color: #fdecea;
+    color: #8a1c13;
+    border-radius: 5px;
+}

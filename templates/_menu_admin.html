@@ -1,0 +1,15 @@
+<nav class="menu-admin">
+
+    <a href="{{ url_for('agenda') }}">Agenda</a>
+    <a href="{{ url_for('reservas') }}">Reservas</a>
+    <a href="{{ url_for('disponibilidad') }}">Disponibilidad</a>
+    <a href="{{ url_for('clientes') }}">Clientes</a>
+    <a href="{{ url_for('servicios') }}">Servicios</a>
+    <a href="{{ url_for('barberos') }}">Barberos</a>
+    <a href="{{ url_for('inicio') }}">Sitio público</a>
+
+    <form action="{{ url_for('logout_admin') }}" method="POST">
+        <button type="submit">Cerrar sesión</button>
+    </form>
+
+</nav>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ukidd Barber - Acceso administración</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="contenedor contenedor-angosto">
+
+        <h1>Ukidd Barber</h1>
+        <h2>Acceso administración</h2>
+
+        <section class="formulario">
+
+            {% if error %}
+                <p class="mensaje-error">{{ error }}</p>
+            {% endif %}
+
+            <form method="POST">
+
+                <label for="clave">
+                    Contraseña
+                </label>
+
+                <input
+                    type="password"
+                    id="clave"
+                    name="clave"
+                    autocomplete="current-password"
+                    required
+                    autofocus
+                >
+
+                <button type="submit">
+                    Ingresar
+                </button>
+
+            </form>
+
+        </section>
+
+        <p>
+            <a href="{{ url_for('inicio') }}">← Volver al inicio</a>
+        </p>
+
+    </div>
+
+</body>
+</html>
