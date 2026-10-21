@@ -953,11 +953,12 @@ def reservar_publico():
                     """
                     INSERT INTO cliente (nombre, telefono, correo)
                     VALUES (?, ?, ?)
+                    RETURNING id_cliente
                     """,
                     (nombre, telefono, correo)
                 )
 
-                id_cliente = cursor.lastrowid
+                id_cliente = cursor.fetchone()["id_cliente"]
 
             else:
                 id_cliente = cliente["id_cliente"]
