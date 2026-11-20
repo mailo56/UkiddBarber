@@ -390,14 +390,20 @@ def inicio():
 
 @app.route("/clientes")
 def clientes():
+    filtro = request.args.get("nombre", "").strip()
     with conexion_bd() as conexion:
         clientes = conexion.execute(
             "SELECT * FROM cliente ORDER BY id_cliente DESC"
         ).fetchall()
 
+    if filtro:
+        termino = filtro.casefold()
+        clientes = [fila for fila in clientes if termino in fila["nombre"].casefold()]
+
     return render_template(
         "clientes.html",
-        clientes=clientes
+        clientes=clientes,
+        filtro=filtro
     )
 
 
