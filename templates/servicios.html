@@ -89,6 +89,19 @@
 
             <h3>Servicios registrados</h3>
 
+            <form method="get" action="{{ url_for('servicios') }}">
+                <label for="consulta">Orden</label>
+                <select id="consulta" name="orden">
+                    <option value="">Más recientes primero</option>
+                    <option value="asc"{% if filtro == "asc" %} selected{% endif %}>Menor a mayor precio</option>
+                    <option value="desc"{% if filtro == "desc" %} selected{% endif %}>Mayor a menor precio</option>
+                </select>
+                <button type="submit">Ordenar</button>
+                {% if filtro %}
+                    <a href="{{ url_for('servicios') }}">Restablecer</a>
+                {% endif %}
+            </form>
+
             {% if servicios %}
 
                 <table>
