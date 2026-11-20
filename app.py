@@ -642,6 +642,7 @@ def eliminar_barbero(id_barbero):
 
 @app.route("/disponibilidad")
 def disponibilidad():
+    filtro = request.args.get("barbero", type=int)
     with conexion_bd() as conexion:
         barberos = listar_barberos(conexion)
 
@@ -649,6 +650,7 @@ def disponibilidad():
             """
             SELECT
                 disponibilidad.id_disponibilidad,
+                disponibilidad.id_barbero,
                 disponibilidad.fecha,
                 disponibilidad.hora,
                 disponibilidad.disponible,
@@ -660,10 +662,14 @@ def disponibilidad():
             """
         ).fetchall()
 
+    if filtro:
+        disponibilidades = [fila for fila in disponibilidades if fila["id_barbero"] == filtro]
+
     return render_template(
         "disponibilidad.html",
         barberos=barberos,
-        disponibilidades=disponibilidades
+        disponibilidades=disponibilidades,
+        filtro=filtro
     )
 
 
