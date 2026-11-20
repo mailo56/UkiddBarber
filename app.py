@@ -735,18 +735,23 @@ def eliminar_disponibilidad(id_disponibilidad):
 
 @app.route("/reservas")
 def reservas():
+    filtro = request.args.get("estado", "")
     with conexion_bd() as conexion:
         clientes = listar_clientes(conexion)
         servicios = listar_servicios(conexion)
         barberos = listar_barberos(conexion)
         reservas = consultar_reservas(conexion)
 
+    if filtro in ("Confirmada", "Cancelada"):
+        reservas = [fila for fila in reservas if fila["estado"] == filtro]
+
     return render_template(
         "reservas.html",
         clientes=clientes,
         servicios=servicios,
         barberos=barberos,
-        reservas=reservas
+        reservas=reservas,
+        filtro=filtro
     )
 
 
