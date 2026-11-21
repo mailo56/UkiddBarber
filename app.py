@@ -475,14 +475,19 @@ def eliminar_cliente(id_cliente):
 
 @app.route("/servicios")
 def servicios():
+    filtro = request.args.get("orden", "")
     with conexion_bd() as conexion:
         servicios = conexion.execute(
             "SELECT * FROM servicio ORDER BY id_servicio DESC"
         ).fetchall()
 
+    if filtro in ("asc", "desc"):
+        servicios = sorted(servicios, key=lambda fila: fila["precio"], reverse=filtro == "desc")
+
     return render_template(
         "servicios.html",
-        servicios=servicios
+        servicios=servicios,
+        filtro=filtro
     )
 
 
