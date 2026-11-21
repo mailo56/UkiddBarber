@@ -31,6 +31,15 @@
 
             <h3>Reservas programadas</h3>
 
+            <form method="get" action="{{ url_for('agenda') }}">
+                <label for="consulta">Fecha</label>
+                <input id="consulta" type="date" name="fecha" value="{{ filtro }}">
+                <button type="submit">Aplicar</button>
+                {% if filtro %}
+                    <a href="{{ url_for('agenda') }}">Restablecer</a>
+                {% endif %}
+            </form>
+
             {% if reservas %}
 
                 <table>
@@ -90,7 +99,7 @@
             {% else %}
 
                 <p>
-                    No hay reservas registradas en la agenda.
+                    {% if filtro %}No hay resultados para la selección.{% else %}No hay reservas registradas en la agenda.{% endif %}
                 </p>
 
             {% endif %}

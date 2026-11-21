@@ -908,12 +908,17 @@ def cancelar_reserva(id_reserva):
 
 @app.route("/agenda")
 def agenda():
+    filtro = request.args.get("fecha", "")
     with conexion_bd() as conexion:
         reservas = consultar_reservas(conexion)
 
+    if filtro:
+        reservas = [fila for fila in reservas if str(fila["fecha"]) == filtro]
+
     return render_template(
         "agenda.html",
-        reservas=reservas
+        reservas=reservas,
+        filtro=filtro
     )
 
 
