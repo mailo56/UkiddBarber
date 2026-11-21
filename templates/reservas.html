@@ -150,6 +150,19 @@
 
             <h3>Reservas registradas</h3>
 
+            <form method="get" action="{{ url_for('reservas') }}">
+                <label for="consulta">Estado</label>
+                <select id="consulta" name="estado">
+                    <option value="">Todos</option>
+                    <option value="Confirmada"{% if filtro == "Confirmada" %} selected{% endif %}>Confirmada</option>
+                    <option value="Cancelada"{% if filtro == "Cancelada" %} selected{% endif %}>Cancelada</option>
+                </select>
+                <button type="submit">Aplicar</button>
+                {% if filtro %}
+                    <a href="{{ url_for('reservas') }}">Restablecer</a>
+                {% endif %}
+            </form>
+
             {% if reservas %}
 
                 <table>
@@ -256,7 +269,7 @@
             {% else %}
 
                 <p>
-                    No hay reservas registradas.
+                    {% if filtro %}No hay resultados para la selección.{% else %}No hay reservas registradas.{% endif %}
                 </p>
 
             {% endif %}
